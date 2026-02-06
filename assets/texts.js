@@ -157,6 +157,8 @@ not a conclusion, but a way to notice what you might otherwise miss.
 If you reread it later, you may recognize different details — because you will be in a slightly different state.
 
 Clarity often emerges through attention and reflection, not force.
+Many people find it useful to return to this reading at key moments,
+rather than treating it as a one-time answer.
   `
 },
 
