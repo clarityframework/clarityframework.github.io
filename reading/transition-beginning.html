@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Life Phase Reading</title>
+  <meta name="description" content="A reflective life phase and cycle reading." />
+  <style>
+    :root { --bg:#0b0c10; --card:#11131a; --text:#e8eaf1; --muted:#b7bdd1; --line:#20263a; }
+    body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--text); }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 56px 20px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:28px; }
+    h1 { margin:0 0 6px; font-size: 30px; }
+    h2 { margin-top: 26px; font-size: 20px; }
+    p { margin: 12px 0; line-height: 1.7; color: var(--muted); font-size: 16px; }
+    .note { margin-top:24px; font-size:13px; opacity:.85; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Hello <span id="username"></span>,</h1>
+
+      <p>
+        Based on your responses, this reading reflects a period of transition
+        combined with the early stage of a new cycle.
+      </p>
+
+      <h2>Your Current Phase: Transition</h2>
+      <p>
+        Transition phases often emerge when previous structures or roles
+        no longer feel fully aligned, even if the next direction is not yet clear.
+      </p>
+
+      <h2>Your Current Cycle: Beginning</h2>
+      <p>
+        The beginning cycle emphasizes emergence, exploration, and gentle movement
+        rather than immediate certainty or commitment.
+      </p>
+
+      <h2>What This Combination Suggests</h2>
+      <p>
+        When transition and beginning overlap, it can be useful to prioritize
+        awareness over action. This is a time for noticing patterns,
+        signals, and internal responses before making major decisions.
+      </p>
+
+      <h2>Reflection Points</h2>
+      <p>
+        • What feels outdated or misaligned right now?<br>
+        • Where might small experiments feel safer than large commitments?<br>
+        • What signals are you currently overlooking?
+      </p>
+
+      <p class="note">
+        Note: This reading is a reflective tool only. It does not predict outcomes
+        or replace professional advice. All decisions remain your responsibility.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name") || "there";
+    document.getElementById("username").textContent = name;
+  </script>
+</body>
+</html>
