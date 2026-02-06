@@ -161,10 +161,12 @@ Clarity often emerges through attention and reflection, not force.
 },
 
   reflectionPoints: {
-    default: `
+  default: `
 • What feels most relevant in my life at this moment, even if it’s unclear?<br>
 • Where might patience be more supportive than urgency?<br>
-• What patterns seem to repeat when I pause and observe?<br>
-    `
-  }
+• What pattern seems to repeat when I pause and observe?<br>
+• If I removed pressure to “figure it out,” what becomes easier to notice?<br>
+• What would a small, low-risk experiment look like this week?<br>
+  `
+}
 };
