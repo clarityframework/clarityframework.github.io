@@ -169,6 +169,47 @@ rather than treating it as a one-time answer.
 • What pattern seems to repeat when I pause and observe?<br>
 • If I removed pressure to “figure it out,” what becomes easier to notice?<br>
 • What would a small, low-risk experiment look like this week?<br>
+  `,
+
+  foundation: `
+• What structure, routine, or boundary would make my next 30 days feel calmer?<br>
+• Where am I trying to “push forward” without enough support underneath?<br>
+• What is one thing I can simplify to reduce mental noise?<br>
+• What does “stable enough” look like for me right now (not perfect, just workable)?<br>
+• What small commitment would I be proud to keep consistently for one week?<br>
+  `,
+
+  transition: `
+• What feels misaligned, even if I can’t fully explain it yet?<br>
+• Where am I pressuring myself to decide before I have enough clarity?<br>
+• What is one pattern I’m repeating when I feel uncertain or restless?<br>
+• If I paused the need for an “answer,” what would I notice about my true preferences?<br>
+• What is one small, reversible experiment that could bring more information this week?<br>
+  `,
+
+  expansion: `
+• What opportunity excites me — and what “reason” makes it meaningful beyond hype?<br>
+• Where might I be overcommitting simply because momentum feels good?<br>
+• What would it look like to choose focus without shrinking my ambition?<br>
+• Which action would create the biggest downstream benefit in the next 14 days?<br>
+• What boundary would protect my energy while I keep expanding?<br>
+  `,
+
+  consolidation: `
+• What is already working — and how can I make it more consistent or reliable?<br>
+• What small adjustment would reduce friction in my daily life the most?<br>
+• Where am I chasing novelty instead of strengthening what I’ve built?<br>
+• What would “sustainable progress” look like if I measured it over 3 months, not 3 days?<br>
+• What one system (habit, workflow, boundary) would I refine first for long-term ease?<br>
+  `,
+
+  reflection: `
+• What have I been avoiding acknowledging about my needs or priorities?<br>
+• What lesson keeps repeating until I pay attention to it?<br>
+• Where am I interpreting my situation harshly instead of accurately?<br>
+• If I viewed the last few months as data, what pattern stands out most?<br>
+• What decision would feel easier if I gave myself permission to understand before acting?<br>
   `
-}
+},
+    
 };
