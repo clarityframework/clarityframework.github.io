@@ -13,11 +13,13 @@
     <div class="card">
       <h1>Hello <span id="username"></span>,</h1>
 
-      <p>
-        Based on your responses, this reading reflects the
-        <strong>{{PHASE}}</strong> phase combined with the
-        <strong>{{CYCLE}}</strong> cycle.
-      </p>
+      <div id="opening-text"></div>
+
+    <p>
+      This reading reflects the
+      <strong>{{PHASE}}</strong> phase combined with the
+      <strong>{{CYCLE}}</strong> cycle.
+    </p>
 
       <h2>Your Current Phase: {{PHASE}}</h2>
       <div id="phase-text"></div>
@@ -44,6 +46,7 @@
     const PHASE_KEY = "{{PHASE_KEY}}";
     const CYCLE_KEY = "{{CYCLE_KEY}}";
 
+    document.getElementById("opening-text").innerHTML = TEXTS.opening.default;
     document.getElementById("phase-text").innerHTML = TEXTS.phase[PHASE_KEY];
     document.getElementById("cycle-text").innerHTML = TEXTS.cycle[CYCLE_KEY];
     document.getElementById("integration-text").innerHTML = TEXTS.integration.default;
