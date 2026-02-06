@@ -50,7 +50,8 @@
     document.getElementById("phase-text").innerHTML = TEXTS.phase[PHASE_KEY];
     document.getElementById("cycle-text").innerHTML = TEXTS.cycle[CYCLE_KEY];
     document.getElementById("integration-text").innerHTML = TEXTS.integration.default;
-    document.getElementById("reflection-points").innerHTML = TEXTS.reflectionPoints.default;
+    document.getElementById("reflection-points").innerHTML =
+  TEXTS.reflectionPoints[PHASE_KEY] || TEXTS.reflectionPoints.default;
   </script>
 </body>
 </html>
