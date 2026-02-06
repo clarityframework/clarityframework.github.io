@@ -1,4 +1,4 @@
-const TEXTS = {
+window.TEXTS = {
     phase: {
     foundation: `
 The Foundation Phase emphasizes stability, grounding, and the creation of reliable structures.
