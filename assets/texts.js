@@ -72,37 +72,68 @@ your next decisions tend to feel more aligned—and less reactive.
   cycle: {
     beginning: `
 The Beginning Cycle represents early movement and emerging awareness.
-It is a stage where direction starts to form, but outcomes remain undefined.
+It is the stage where direction starts to form, but outcomes remain undefined.
 
-This cycle favors curiosity, small steps, and openness over immediate certainty.
+Common signs include curiosity, tentative planning, and a desire to explore
+without fully committing yet.
+People in this cycle often feel a mix of excitement and uncertainty,
+as possibilities feel open but unproven.
+
+This cycle responds best to experimentation and low-pressure exploration.
+Rather than demanding certainty, it supports learning through small,
+reversible steps that build confidence over time.
     `,
 
     acceleration: `
 The Acceleration Cycle is marked by increasing momentum and engagement.
-Actions taken during this cycle tend to build upon one another more quickly.
+Actions taken during this stage tend to compound more quickly,
+and progress becomes more visible.
 
-Attention to pacing becomes important to maintain balance.
+Common signs include heightened activity, faster decision-making,
+and the sense that “things are moving now.”
+At times, this can create pressure to keep up or push harder.
+
+This cycle benefits from intentional pacing.
+When momentum is guided rather than chased,
+progress remains sustainable and less stressful.
     `,
 
     peak: `
 The Peak Cycle reflects intensity, visibility, and heightened impact.
-Efforts often reach their most active or demanding point during this stage.
+Energy, responsibility, and attention often reach their highest levels here.
 
-Clarity and responsibility are especially important here.
+Common signs include increased demand, recognition, or pressure to perform.
+Some people feel energized by this stage, while others feel stretched.
+
+The Peak Cycle asks for clarity and conscious prioritization.
+By choosing focus over overextension,
+you protect both results and well-being.
     `,
 
     adjustment: `
 The Adjustment Cycle emphasizes recalibration and fine-tuning.
-It often follows periods of intensity, asking for course correction rather than abandonment.
+It often follows periods of intensity or growth,
+when small misalignments become more noticeable.
 
-Small changes during this cycle can significantly affect long-term outcomes.
+Common signs include fatigue, reassessment, or the sense that
+minor changes could significantly improve outcomes.
+This is not a step backward, but a strategic pause.
+
+Adjustment works best when treated as refinement rather than correction.
+Subtle shifts made here often determine long-term stability.
     `,
 
     closure: `
-The Closure Cycle involves completion, release, and transition away from what has run its course.
-It allows space for lessons to integrate before the next beginning.
+The Closure Cycle involves completion, release, and transition away
+from what has run its course.
 
-Closure does not imply loss; it creates capacity.
+Common signs include emotional processing, finalization of projects,
+or the need to let go of identities or commitments that no longer fit.
+This stage can feel both relieving and bittersweet.
+
+Closure creates capacity.
+When endings are acknowledged rather than rushed,
+the next beginning tends to arrive with greater clarity.
     `
   },
 
