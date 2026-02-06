@@ -148,13 +148,17 @@ helping you understand why certain patterns, questions, or tensions may be prese
   },
   
   integration: {
-    default: `
+  default: `
 When a life phase and cycle intersect, the experience is shaped by both broader context and immediate timing.
 Rather than indicating a fixed outcome, this combination highlights what may be most useful to focus on now.
 
+A helpful way to use this reading is to treat it as a “lens”:
+not a conclusion, but a way to notice what you might otherwise miss.
+If you reread it later, you may recognize different details — because you will be in a slightly different state.
+
 Clarity often emerges through attention and reflection, not force.
-    `
-  },
+  `
+},
 
   reflectionPoints: {
     default: `
