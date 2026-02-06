@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{PHASE}} × {{CYCLE}} | Life Phase Reading</title>
+  <meta name="description" content="A reflective reading for {{PHASE}} phase and {{CYCLE}} cycle." />
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Hello <span id="username"></span>,</h1>
+
+      <p>
+        Based on your responses, this reading reflects the
+        <strong>{{PHASE}}</strong> phase combined with the
+        <strong>{{CYCLE}}</strong> cycle.
+      </p>
+
+      <h2>Your Current Phase: {{PHASE}}</h2>
+      <p>
+        {{PHASE_TEXT}}
+      </p>
+
+      <h2>Your Current Cycle: {{CYCLE}}</h2>
+      <p>
+        {{CYCLE_TEXT}}
+      </p>
+
+      <h2>What This Combination Suggests</h2>
+      <p>
+        {{INTEGRATION_TEXT}}
+      </p>
+
+      <h2>Reflection Points</h2>
+      <p>
+        {{REFLECTION_POINTS}}
+      </p>
+
+      <p class="note">
+        Note: This reading is a reflective tool only. It does not predict outcomes
+        or replace professional advice. All decisions remain your responsibility.
+      </p>
+    </div>
+  </div>
+
+  <script src="/assets/script.js"></script>
+</body>
+</html>
