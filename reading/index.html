@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Life Phase & Cycle Reading</title>
+  <meta name="description" content="A reflective life phase and cycle reading designed to support clarity and self-understanding." />
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <h1>Hello <span id="username"></span>,</h1>
+
+      <p>
+        Welcome to your Life Phase & Cycle Reading.
+        This experience is designed to help you understand the broader context
+        of where you are in life right now — without predictions or pressure.
+      </p>
+
+      <p>
+        Rather than offering answers, this reading provides a structured way
+        to notice patterns, timing, and priorities that may already be present.
+      </p>
+
+      <h2>How to Use This Reading</h2>
+      <ul>
+        <li>Read with curiosity rather than urgency</li>
+        <li>Notice what resonates — and what doesn’t</li>
+        <li>Revisit at different moments for new perspective</li>
+      </ul>
+
+      <h2>Your Available Readings</h2>
+
+      <p>
+        Click the link below that matches your result.
+        If you’re unsure, start with the one that feels closest.
+      </p>
+
+      <div class="list">
+
+        <!-- FOUNDATION -->
+        <h3>Foundation Phase</h3>
+        <ul>
+          <li><a href="/reading/foundation-beginning.html">Foundation × Beginning</a></li>
+          <li><a href="/reading/foundation-acceleration.html">Foundation × Acceleration</a></li>
+          <li><a href="/reading/foundation-peak.html">Foundation × Peak</a></li>
+          <li><a href="/reading/foundation-adjustment.html">Foundation × Adjustment</a></li>
+          <li><a href="/reading/foundation-closure.html">Foundation × Closure</a></li>
+        </ul>
+
+        <!-- TRANSITION -->
+        <h3>Transition Phase</h3>
+        <ul>
+          <li><a href="/reading/transition-beginning.html">Transition × Beginning</a></li>
+          <li><a href="/reading/transition-acceleration.html">Transition × Acceleration</a></li>
+          <li><a href="/reading/transition-peak.html">Transition × Peak</a></li>
+          <li><a href="/reading/transition-adjustment.html">Transition × Adjustment</a></li>
+          <li><a href="/reading/transition-closure.html">Transition × Closure</a></li>
+        </ul>
+
+        <!-- EXPANSION -->
+        <h3>Expansion Phase</h3>
+        <ul>
+          <li><a href="/reading/expansion-beginning.html">Expansion × Beginning</a></li>
+          <li><a href="/reading/expansion-acceleration.html">Expansion × Acceleration</a></li>
+          <li><a href="/reading/expansion-peak.html">Expansion × Peak</a></li>
+          <li><a href="/reading/expansion-adjustment.html">Expansion × Adjustment</a></li>
+          <li><a href="/reading/expansion-closure.html">Expansion × Closure</a></li>
+        </ul>
+
+        <!-- CONSOLIDATION -->
+        <h3>Consolidation Phase</h3>
+        <ul>
+          <li><a href="/reading/consolidation-beginning.html">Consolidation × Beginning</a></li>
+          <li><a href="/reading/consolidation-acceleration.html">Consolidation × Acceleration</a></li>
+          <li><a href="/reading/consolidation-peak.html">Consolidation × Peak</a></li>
+          <li><a href="/reading/consolidation-adjustment.html">Consolidation × Adjustment</a></li>
+          <li><a href="/reading/consolidation-closure.html">Consolidation × Closure</a></li>
+        </ul>
+
+        <!-- REFLECTION -->
+        <h3>Reflection Phase</h3>
+        <ul>
+          <li><a href="/reading/reflection-beginning.html">Reflection × Beginning</a></li>
+          <li><a href="/reading/reflection-acceleration.html">Reflection × Acceleration</a></li>
+          <li><a href="/reading/reflection-peak.html">Reflection × Peak</a></li>
+          <li><a href="/reading/reflection-adjustment.html">Reflection × Adjustment</a></li>
+          <li><a href="/reading/reflection-closure.html">Reflection × Closure</a></li>
+        </ul>
+
+      </div>
+
+      <p class="note">
+        Note: This reading is a reflective tool only.
+        It does not predict outcomes or replace professional advice.
+      </p>
+
+    </div>
+  </div>
+
+  <script src="/assets/script.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name") || "there";
+    document.getElementById("username").textContent = name;
+
+    // name パラメータを各リンクに引き継ぐ
+    document.querySelectorAll("a").forEach(link => {
+      link.href += `?name=${encodeURIComponent(name)}`;
+    });
+  </script>
+</body>
+</html>
