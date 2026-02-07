@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Consolidation × Peak | Life Phase Reading</title>
+  <meta name="description" content="A reflective reading for the Consolidation phase and the Peak cycle." />
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Hello <span id="username"></span>,</h1>
+
+      <div id="opening-text"></div>
+
+      <p>
+        This reading reflects the
+        <strong>Consolidation</strong> phase combined with the
+        <strong>Peak</strong> cycle.
+      </p>
+
+      <h2>Your Current Phase: Consolidation</h2>
+      <div id="phase-text"></div>
+
+      <h2>Your Current Cycle: Peak</h2>
+      <div id="cycle-text"></div>
+
+      <h2>What This Combination Suggests</h2>
+      <div id="integration-text"></div>
+
+      <h2>Reflection Points</h2>
+      <div id="reflection-points"></div>
+
+      <p class="note">
+        Note: This reading is a reflective tool only. It does not predict outcomes
+        or replace professional advice. All decisions remain your responsibility.
+      </p>
+    </div>
+  </div>
+
+  <script src="/assets/script.js"></script>
+  <script src="/assets/texts.js"></script>
+  <script>
+    const PHASE_KEY = "consolidation";
+    const CYCLE_KEY = "peak";
+
+    document.getElementById("opening-text").innerHTML = TEXTS.opening.default;
+    document.getElementById("phase-text").innerHTML = TEXTS.phase[PHASE_KEY];
+    document.getElementById("cycle-text").innerHTML = TEXTS.cycle[CYCLE_KEY];
+    document.getElementById("integration-text").innerHTML = TEXTS.integration.default;
+    document.getElementById("reflection-points").innerHTML =
+      TEXTS.reflectionPoints[PHASE_KEY] || TEXTS.reflectionPoints.default;
+  </script>
+</body>
+</html>
