@@ -28,15 +28,22 @@
 
   document.addEventListener("DOMContentLoaded", function(){
     document.body.innerHTML = `
-      <div style="font-family: Arial, sans-serif; max-width: 720px; margin: 60px auto; padding: 0 20px;">
+      <div style="font-family: Arial, sans-serif; max-width: 760px; margin: 60px auto; padding: 0 20px; line-height: 1.55;">
         <h1 style="margin: 0 0 12px;">Reading unavailable</h1>
         <p style="margin: 0 0 14px;">We couldn’t open your reading from this checkout session.</p>
 
         <div style="margin: 18px 0 18px; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
+          <p style="margin: 0 0 10px;"><strong>Do not repurchase yet.</strong></p>
+          <p style="margin: 0 0 10px;">If you already purchased, open your order confirmation email and use the <strong>“View order”</strong> link to access your purchase.</p>
+          <p style="margin: 0;">Then click <strong>“Open My Reading”</strong> again.</p>
+        </div>
+
+        <div style="margin: 18px 0 18px; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
           <p style="margin: 0 0 10px;"><strong>Fix (recommended):</strong> Return to the assessment and complete checkout again.</p>
-          <ul style="margin: 0; padding-left: 18px; line-height: 1.55;">
+          <ul style="margin: 0; padding-left: 18px;">
             <li>Use a normal browser window (not private mode).</li>
             <li>Avoid multiple tabs during checkout.</li>
+            <li>Disable aggressive privacy extensions temporarily if needed.</li>
           </ul>
         </div>
 
