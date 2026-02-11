@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Your Reading</title>
-  <script>
-    function redirectToReading() {
-      const params = new URLSearchParams(window.location.search);
-      const slug = params.get("slug");
-      const name = params.get("name");
+<meta charset="UTF-8">
+<title>Your Reading</title>
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const slugFromQuery = params.get("slug");
+  const nameFromQuery = params.get("name");
 
-      if (slug) {
-        window.location.href = "/reading/" + slug + ".html?name=" + encodeURIComponent(name);
-      } else {
-        document.body.innerHTML = "<h2>Reading not found.</h2>";
-      }
-    }
+  if(slugFromQuery){
+    localStorage.setItem("cf_slug", slugFromQuery);
+    localStorage.setItem("cf_name", nameFromQuery || "");
+  }
 
-    window.onload = redirectToReading;
-  </script>
+  const slug = localStorage.getItem("cf_slug");
+  const name = localStorage.getItem("cf_name") || "";
+
+  if(slug){
+    localStorage.removeItem("cf_slug");
+    localStorage.removeItem("cf_name");
+    window.location.href = "/reading/" + slug + ".html?name=" + encodeURIComponent(name);
+  } else {
+    document.addEventListener("DOMContentLoaded", function(){
+      document.body.innerHTML = "<h2>Reading unavailable</h2>";
+    });
+  }
+})();
+</script>
 </head>
 <body>
-  <p>Preparing your reading...</p>
+Preparing your reading...
 </body>
 </html>
