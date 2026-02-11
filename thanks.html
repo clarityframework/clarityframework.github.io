@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Your Reading</title>
+  <script>
+    function redirectToReading() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get("slug");
+      const name = params.get("name");
+
+      if (slug) {
+        window.location.href = "/reading/" + slug + ".html?name=" + encodeURIComponent(name);
+      } else {
+        document.body.innerHTML = "<h2>Reading not found.</h2>";
+      }
+    }
+
+    window.onload = redirectToReading;
+  </script>
+</head>
+<body>
+  <p>Preparing your reading...</p>
+</body>
+</html>
