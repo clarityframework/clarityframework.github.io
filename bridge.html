@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Redirecting</title>
+<script>
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug");
+  const name = params.get("name") || "";
+
+  if(slug){
+    localStorage.setItem("cf_slug", slug);
+    localStorage.setItem("cf_name", name);
+  }
+
+  window.location.href = "https://clarityframework.lemonsqueezy.com/checkout/buy/5e0c2e36-85af-4c0e-bfc3-3841802559c5";
+})();
+</script>
+</head>
+<body>
+Redirecting...
+</body>
+</html>
