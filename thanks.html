@@ -5,11 +5,13 @@
 <title>Your Reading</title>
 <script>
 (function(){
+  const ASSESSMENT_URL = "https://tally.so/r/D4dkVb";
+
   const params = new URLSearchParams(window.location.search);
   const slugFromQuery = params.get("slug");
   const nameFromQuery = params.get("name");
 
-  if(slugFromQuery){
+  if (slugFromQuery) {
     localStorage.setItem("cf_slug", slugFromQuery);
     localStorage.setItem("cf_name", nameFromQuery || "");
   }
@@ -17,15 +19,37 @@
   const slug = localStorage.getItem("cf_slug");
   const name = localStorage.getItem("cf_name") || "";
 
-  if(slug){
+  if (slug) {
     localStorage.removeItem("cf_slug");
     localStorage.removeItem("cf_name");
     window.location.href = "/reading/" + slug + ".html?name=" + encodeURIComponent(name);
-  } else {
-    document.addEventListener("DOMContentLoaded", function(){
-      document.body.innerHTML = "<h2>Reading unavailable</h2>";
-    });
+    return;
   }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    document.body.innerHTML = `
+      <div style="font-family: Arial, sans-serif; max-width: 720px; margin: 60px auto; padding: 0 20px;">
+        <h1 style="margin: 0 0 12px;">Reading unavailable</h1>
+        <p style="margin: 0 0 14px;">We couldn’t open your reading from this checkout session.</p>
+
+        <div style="margin: 18px 0 18px; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
+          <p style="margin: 0 0 10px;"><strong>Fix (recommended):</strong> Return to the assessment and complete checkout again.</p>
+          <ul style="margin: 0; padding-left: 18px; line-height: 1.55;">
+            <li>Use a normal browser window (not private mode).</li>
+            <li>Avoid multiple tabs during checkout.</li>
+          </ul>
+        </div>
+
+        <a href="${ASSESSMENT_URL}" style="display: inline-block; padding: 12px 16px; border-radius: 10px; text-decoration: none; border: 1px solid #111; color: #111;">
+          Back to Assessment
+        </a>
+
+        <p style="margin: 18px 0 0; color: #666; font-size: 14px;">
+          Note: This is a self-reflection tool (not fortune-telling).
+        </p>
+      </div>
+    `;
+  });
 })();
 </script>
 </head>
