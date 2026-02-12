@@ -12,67 +12,66 @@
     const slugFromQuery = params.get("slug");
     const nameFromQuery = params.get("name");
 
-    // 1) If slug arrives, store it briefly (bridge)
+    // If we received slug/name, store them (do NOT delete immediately)
     if (slugFromQuery) {
       try {
         localStorage.setItem("cf_slug", slugFromQuery);
         localStorage.setItem("cf_name", nameFromQuery || "");
+        localStorage.setItem("cf_slug_saved_at", String(Date.now()));
       } catch (e) {}
     }
 
-    // 2) Recovery: if user already opened a reading on this device, resume it
-    try {
-      const last = localStorage.getItem("cf_last_reading_url");
-      if (!slugFromQuery && last) {
-        window.location.replace(last);
-        return;
-      }
-    } catch (e) {}
-
-    // 3) Normal bridge: open reading using stored slug
+    // Try to recover
     let slug = null;
     let name = "";
+    let lastReadingUrl = null;
+
     try {
       slug = localStorage.getItem("cf_slug");
       name = localStorage.getItem("cf_name") || "";
+      lastReadingUrl = localStorage.getItem("cf_last_reading_url");
     } catch (e) {}
 
+    // If slug exists, go to reading
     if (slug) {
-      try {
-        localStorage.removeItem("cf_slug");
-        localStorage.removeItem("cf_name");
-      } catch (e) {}
-
-      const target = "/reading/" + slug + ".html?name=" + encodeURIComponent(name);
-      window.location.replace(target);
+      window.location.href = "/reading/" + slug + ".html?name=" + encodeURIComponent(name);
       return;
     }
 
-    // 4) Fallback UI (no slug, no last reading)
+    // Otherwise show fallback page
     document.addEventListener("DOMContentLoaded", function () {
+      const safeLast = lastReadingUrl && lastReadingUrl.startsWith(location.origin + "/reading/");
       document.body.innerHTML = `
-        <div style="font-family: Arial, sans-serif; max-width: 760px; margin: 60px auto; padding: 0 20px; line-height: 1.55;">
+        <div style="font-family: system-ui, -apple-system, Segoe UI, sans-serif; max-width: 760px; margin: 60px auto; padding: 0 20px; line-height: 1.55;">
           <h1 style="margin: 0 0 12px;">Reading unavailable</h1>
           <p style="margin: 0 0 14px;">We couldn’t open your reading from this session.</p>
 
           <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
             <p style="margin: 0 0 10px;"><strong>Do not repurchase yet.</strong></p>
-            <p style="margin: 0 0 10px;">
-              If you already paid, open your order email and click <strong>“View order”</strong>.
-              Then click <strong>“Open My Reading”</strong> again.
-            </p>
             <p style="margin: 0;">
-              If payment did not go through, return to the assessment and try again in a normal browser window.
+              This link is designed for immediate access right after checkout.
+              For future access, please bookmark your reading page once it opens.
             </p>
           </div>
 
+          ${safeLast ? `
           <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
-            <p style="margin: 0 0 10px;"><strong>Troubleshooting</strong></p>
+            <p style="margin: 0 0 10px;"><strong>Recovery (this device only):</strong></p>
+            <a href="${lastReadingUrl}" style="display:inline-block; padding: 12px 16px; border-radius: 10px; text-decoration:none; border:1px solid #111; color:#111;">
+              Open Last Reading
+            </a>
+          </div>` : ""}
+
+          <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
+            <p style="margin: 0 0 10px;"><strong>Fix (recommended):</strong></p>
             <ul style="margin: 0; padding-left: 18px;">
               <li>Use a normal browser window (not private mode).</li>
               <li>Avoid multiple tabs during checkout.</li>
               <li>Disable aggressive privacy extensions temporarily if needed.</li>
             </ul>
+            <p style="margin: 10px 0 0; color:#555; font-size: 14px;">
+              Only if your payment did <strong>not</strong> go through, you may return to the assessment and try again.
+            </p>
           </div>
 
           <a href="${ASSESSMENT_URL}" style="display: inline-block; padding: 12px 16px; border-radius: 10px; text-decoration: none; border: 1px solid #111; color: #111;">
