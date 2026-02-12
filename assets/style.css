@@ -49,3 +49,18 @@ p {
   color: #d8deea;
   line-height: 1.7;
 }
+/* --- Clarity Framework Signature Layer --- */
+(function () {
+  if (!location.pathname.startsWith("/reading/")) return;
+
+  if (document.querySelector(".signature")) return;
+
+  const signatureHTML = `
+    <p class="signature">— Clarity Framework</p>
+  `;
+
+  const closing = document.querySelector(".closing");
+  if (closing) {
+    closing.insertAdjacentHTML("afterend", signatureHTML);
+  }
+})();
