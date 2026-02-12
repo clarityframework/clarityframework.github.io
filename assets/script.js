@@ -54,6 +54,7 @@ if (el) el.textContent = name;
     note.insertAdjacentHTML("beforebegin", closingHTML);
   }
 })();
+
 (function () {
   // Only apply on reading pages
   if (!location.pathname.startsWith("/reading/")) return;
