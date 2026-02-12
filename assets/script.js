@@ -31,3 +31,26 @@ if (el) el.textContent = name;
     localStorage.setItem("cf_last_reading_url", location.href);
   } catch (e) {}
 })();
+
+/* --- Clarity Framework Closing Layer --- */
+(function () {
+  // Only apply on reading pages
+  if (!location.pathname.startsWith("/reading/")) return;
+
+  // Avoid duplicate injection
+  if (document.querySelector(".closing")) return;
+
+  const closingHTML = `
+    <div class="closing">
+      <p>
+        You are not behind. You are not early.
+        You are in a specific moment — and clarity comes from meeting it fully.
+      </p>
+    </div>
+  `;
+
+  const note = document.querySelector(".note");
+  if (note) {
+    note.insertAdjacentHTML("beforebegin", closingHTML);
+  }
+})();
