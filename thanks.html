@@ -6,6 +6,21 @@
   <title>Your Reading</title>
   <script>
   (function () {
+
+    // ===============================
+    // NEW: OID restore (cross-device)
+    // ===============================
+    const paramsEarly = new URLSearchParams(window.location.search);
+    const oid = paramsEarly.get("oid");
+    if (oid) {
+      const resolveUrl =
+        "https://clarity-oid-resolver.gutenbergblog55.workers.dev/api/resolve?oid=" +
+        encodeURIComponent(oid);
+      window.location.replace(resolveUrl);
+      return;
+    }
+    // ===============================
+
     const ASSESSMENT_URL = "https://tally.so/r/D4dkVb";
     const SLUG_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
@@ -17,7 +32,6 @@
     if (slugFromQuery) {
       try {
         localStorage.setItem("cf_slug", slugFromQuery);
-        // store raw name, but keep it safe for URL later
         localStorage.setItem("cf_name", nameFromQuery || "");
         localStorage.setItem("cf_slug_saved_at", String(Date.now()));
       } catch (e) {}
