@@ -54,7 +54,6 @@ if (el) el.textContent = name;
     note.insertAdjacentHTML("beforebegin", closingHTML);
   }
 })();
-/* --- Clarity Framework Signature Layer --- */
 (function () {
   // Only apply on reading pages
   if (!location.pathname.startsWith("/reading/")) return;
