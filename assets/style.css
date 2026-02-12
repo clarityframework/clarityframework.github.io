@@ -43,3 +43,9 @@ p {
 #username {
   color: #ffffff;
 }
+.closing {
+  margin-top: 34px;
+  font-size: 17px;
+  color: #d8deea;
+  line-height: 1.7;
+}
