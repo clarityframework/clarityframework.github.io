@@ -21,22 +21,37 @@
   <div class="wrap">
     <div class="card">
       <h1>Privacy Policy</h1>
+      <p class="muted">Last updated: <span id="d"></span></p>
 
-<p>
-Payment processing is handled by our payment provider.
-</p>
+      <p>
+        Payment processing is handled by our payment provider (Lemon Squeezy).
+        We do not store your payment details.
+      </p>
 
-<p>
-Reading access relies on local browser storage.
-Private browsing or restrictive privacy tools may prevent access.
-</p>
+      <p>
+        We do not store your assessment answers on our servers.
+      </p>
 
-<p>
-We do not sell personal data.
-</p>
+      <p>
+        Reading access relies on local browser storage.
+        Private browsing or restrictive privacy tools may prevent access.
+      </p>
 
+      <p>
+        Local browser storage remains on your device unless you clear it.
+      </p>
+
+      <p>
+        We do not sell personal data.
+      </p>
     </div>
   </div>
+
+  <script>
+    const dt = new Date();
+    const s = dt.getUTCFullYear() + "-" + String(dt.getUTCMonth()+1).padStart(2,"0") + "-" + String(dt.getUTCDate()).padStart(2,"0");
+    const el = document.getElementById("d");
+    if (el) el.textContent = s;
+  </script>
 </body>
 </html>
-
