@@ -7,8 +7,6 @@
   <script>
   (function () {
     const ASSESSMENT_URL = "https://tally.so/r/D4dkVb";
-
-    // --- Settings ---
     const SLUG_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
     const params = new URLSearchParams(window.location.search);
@@ -19,6 +17,7 @@
     if (slugFromQuery) {
       try {
         localStorage.setItem("cf_slug", slugFromQuery);
+        // store raw name, but keep it safe for URL later
         localStorage.setItem("cf_name", nameFromQuery || "");
         localStorage.setItem("cf_slug_saved_at", String(Date.now()));
       } catch (e) {}
@@ -36,7 +35,7 @@
       savedAt = parseInt(localStorage.getItem("cf_slug_saved_at") || "", 10);
     } catch (e) {}
 
-    // Expire slug after TTL (reduce long-term confusion/complaints)
+    // Expire slug after TTL
     const now = Date.now();
     const isExpired = savedAt && (now - savedAt > SLUG_TTL_MS);
     if (isExpired) {
@@ -65,16 +64,15 @@
 
           <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
             <p style="margin: 0 0 10px;"><strong>Do not repurchase for the same session.</strong></p>
-              <p style="margin: 0;">
-  This link is designed for immediate access right after checkout.
-  If your reading opens, <strong>bookmark that page immediately</strong>.
-  Access depends on your browser session and local storage.
-</p>
-<p style="margin: 10px 0 0; font-size:14px; color:#555;">
-  If you wish to take the assessment again in the future,
-  you are welcome to do so at any time.
-</p>
-
+            <p style="margin: 0;">
+              This link is designed for immediate access right after checkout.
+              If your reading opens, <strong>bookmark that page immediately</strong>.
+              Access depends on your browser session and local storage.
+            </p>
+            <p style="margin: 10px 0 0; font-size: 14px; color: #555;">
+              If you wish to take the assessment again in the future,
+              you are welcome to do so at any time.
+            </p>
           </div>
 
           ${safeLast ? `
