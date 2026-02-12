@@ -1,66 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Your Reading</title>
-<script>
-(function(){
-  const ASSESSMENT_URL = "https://tally.so/r/D4dkVb";
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Your Reading</title>
+  <script>
+  (function () {
+    const ASSESSMENT_URL = "https://tally.so/r/D4dkVb";
 
-  const params = new URLSearchParams(window.location.search);
-  const slugFromQuery = params.get("slug");
-  const nameFromQuery = params.get("name");
+    const params = new URLSearchParams(window.location.search);
+    const slugFromQuery = params.get("slug");
+    const nameFromQuery = params.get("name");
 
-  if (slugFromQuery) {
-    localStorage.setItem("cf_slug", slugFromQuery);
-    localStorage.setItem("cf_name", nameFromQuery || "");
-  }
+    // 1) If slug arrives, store it briefly (bridge)
+    if (slugFromQuery) {
+      try {
+        localStorage.setItem("cf_slug", slugFromQuery);
+        localStorage.setItem("cf_name", nameFromQuery || "");
+      } catch (e) {}
+    }
 
-  const slug = localStorage.getItem("cf_slug");
-  const name = localStorage.getItem("cf_name") || "";
+    // 2) Recovery: if user already opened a reading on this device, resume it
+    try {
+      const last = localStorage.getItem("cf_last_reading_url");
+      if (!slugFromQuery && last) {
+        window.location.replace(last);
+        return;
+      }
+    } catch (e) {}
 
-  if (slug) {
-    localStorage.removeItem("cf_slug");
-    localStorage.removeItem("cf_name");
-    window.location.href = "/reading/" + slug + ".html?name=" + encodeURIComponent(name);
-    return;
-  }
+    // 3) Normal bridge: open reading using stored slug
+    let slug = null;
+    let name = "";
+    try {
+      slug = localStorage.getItem("cf_slug");
+      name = localStorage.getItem("cf_name") || "";
+    } catch (e) {}
 
-  document.addEventListener("DOMContentLoaded", function(){
-    document.body.innerHTML = `
-      <div style="font-family: Arial, sans-serif; max-width: 760px; margin: 60px auto; padding: 0 20px; line-height: 1.55;">
-        <h1 style="margin: 0 0 12px;">Reading unavailable</h1>
-        <p style="margin: 0 0 14px;">We couldn’t open your reading from this checkout session.</p>
+    if (slug) {
+      try {
+        localStorage.removeItem("cf_slug");
+        localStorage.removeItem("cf_name");
+      } catch (e) {}
 
-        <div style="margin: 18px 0 18px; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
-          <p style="margin: 0 0 10px;"><strong>Do not repurchase yet.</strong></p>
-          <p style="margin: 0 0 10px;">If you already purchased, open your order confirmation email and use the <strong>“View order”</strong> link to access your purchase.</p>
-          <p style="margin: 0;">Then click <strong>“Open My Reading”</strong> again.</p>
+      const target = "/reading/" + slug + ".html?name=" + encodeURIComponent(name);
+      window.location.replace(target);
+      return;
+    }
+
+    // 4) Fallback UI (no slug, no last reading)
+    document.addEventListener("DOMContentLoaded", function () {
+      document.body.innerHTML = `
+        <div style="font-family: Arial, sans-serif; max-width: 760px; margin: 60px auto; padding: 0 20px; line-height: 1.55;">
+          <h1 style="margin: 0 0 12px;">Reading unavailable</h1>
+          <p style="margin: 0 0 14px;">We couldn’t open your reading from this session.</p>
+
+          <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
+            <p style="margin: 0 0 10px;"><strong>Do not repurchase yet.</strong></p>
+            <p style="margin: 0 0 10px;">
+              If you already paid, open your order email and click <strong>“View order”</strong>.
+              Then click <strong>“Open My Reading”</strong> again.
+            </p>
+            <p style="margin: 0;">
+              If payment did not go through, return to the assessment and try again in a normal browser window.
+            </p>
+          </div>
+
+          <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
+            <p style="margin: 0 0 10px;"><strong>Troubleshooting</strong></p>
+            <ul style="margin: 0; padding-left: 18px;">
+              <li>Use a normal browser window (not private mode).</li>
+              <li>Avoid multiple tabs during checkout.</li>
+              <li>Disable aggressive privacy extensions temporarily if needed.</li>
+            </ul>
+          </div>
+
+          <a href="${ASSESSMENT_URL}" style="display: inline-block; padding: 12px 16px; border-radius: 10px; text-decoration: none; border: 1px solid #111; color: #111;">
+            Back to Assessment
+          </a>
+
+          <p style="margin: 18px 0 0; color: #666; font-size: 14px;">
+            Note: This is a self-reflection tool (not fortune-telling).
+          </p>
         </div>
-
-        <div style="margin: 18px 0 18px; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
-          <p style="margin: 0 0 10px;"><strong>Fix (recommended):</strong> Return to the assessment and complete checkout again.</p>
-          <ul style="margin: 0; padding-left: 18px;">
-            <li>Use a normal browser window (not private mode).</li>
-            <li>Avoid multiple tabs during checkout.</li>
-            <li>Disable aggressive privacy extensions temporarily if needed.</li>
-          </ul>
-        </div>
-
-        <a href="${ASSESSMENT_URL}" style="display: inline-block; padding: 12px 16px; border-radius: 10px; text-decoration: none; border: 1px solid #111; color: #111;">
-          Back to Assessment
-        </a>
-
-        <p style="margin: 18px 0 0; color: #666; font-size: 14px;">
-          Note: This is a self-reflection tool (not fortune-telling).
-        </p>
-      </div>
-    `;
-  });
-})();
-</script>
+      `;
+    });
+  })();
+  </script>
 </head>
 <body>
-Preparing your reading...
+  Preparing your reading...
 </body>
 </html>
