@@ -2,16 +2,13 @@ const params = new URLSearchParams(window.location.search);
 const name = params.get("name") || "there";
 const el = document.getElementById("username");
 if (el) el.textContent = name;
+
 /* --- Clarity Framework Bookmark Safety Layer --- */
 (function () {
-  // Only apply on reading pages
   if (!location.pathname.startsWith("/reading/")) return;
-
-  // Avoid duplicate injection
   if (document.querySelector(".bookmark-note")) return;
 
   const message = "Bookmark this page to access your reading anytime.";
-
   const note = document.createElement("p");
   note.className = "bookmark-note";
   note.textContent = message;
@@ -20,13 +17,9 @@ if (el) el.textContent = name;
   if (!card) return;
 
   const h1 = card.querySelector("h1");
-  if (h1) {
-    h1.insertAdjacentElement("afterend", note);
-  } else {
-    card.prepend(note);
-  }
+  if (h1) h1.insertAdjacentElement("afterend", note);
+  else card.prepend(note);
 
-  // Save last reading locally (recovery layer)
   try {
     localStorage.setItem("cf_last_reading_url", location.href);
   } catch (e) {}
@@ -34,10 +27,7 @@ if (el) el.textContent = name;
 
 /* --- Clarity Framework Closing Layer --- */
 (function () {
-  // Only apply on reading pages
   if (!location.pathname.startsWith("/reading/")) return;
-
-  // Avoid duplicate injection
   if (document.querySelector(".closing")) return;
 
   const closingHTML = `
@@ -50,16 +40,12 @@ if (el) el.textContent = name;
   `;
 
   const note = document.querySelector(".note");
-  if (note) {
-    note.insertAdjacentHTML("beforebegin", closingHTML);
-  }
+  if (note) note.insertAdjacentHTML("beforebegin", closingHTML);
 })();
 
+/* --- Clarity Framework Signature Layer --- */
 (function () {
-  // Only apply on reading pages
   if (!location.pathname.startsWith("/reading/")) return;
-
-  // Avoid duplicate injection
   if (document.querySelector(".signature")) return;
 
   const signatureHTML = `
@@ -67,8 +53,5 @@ if (el) el.textContent = name;
   `;
 
   const closing = document.querySelector(".closing");
-  if (closing) {
-    closing.insertAdjacentHTML("afterend", signatureHTML);
-  }
+  if (closing) closing.insertAdjacentHTML("afterend", signatureHTML);
 })();
-
