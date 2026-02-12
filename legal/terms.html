@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Terms of Service | Clarity Framework</title>
-  <meta name="description" content="Terms of Service for Clarity Framework." />
+  <title>Terms of Use | Clarity Framework</title>
+  <meta name="description" content="Terms of Use for Clarity Framework." />
   <style>
     body{font-family:system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.6;margin:0;background:#0b0c10;color:#e8eaf1}
     .wrap{max-width:860px;margin:0 auto;padding:56px 20px}
@@ -20,25 +20,37 @@
   <div class="wrap">
     <div class="card">
       <h1>Terms of Use</h1>
+      <p class="muted">Last updated: <span id="d"></span></p>
 
-<p>
-This product is a digital self-reflection tool.
-It does not provide medical, legal, financial, or psychological advice.
-</p>
+      <p>
+        This product is a digital self-reflection tool.
+        It does not provide medical, legal, financial, or psychological advice.
+      </p>
 
-<p>
-No interpretation, coaching, or advisory support is provided.
-</p>
+      <p>
+        No interpretation, coaching, or advisory support is provided.
+      </p>
 
-<p>
-All decisions and actions remain the sole responsibility of the user.
-</p>
+      <p>
+        All decisions and actions remain the sole responsibility of the user.
+      </p>
 
-<p>
-Content may not be copied, redistributed, or resold.
-</p>
+      <p>
+        Content may not be copied, redistributed, shared, or resold.
+      </p>
+
+      <p>
+        By purchasing, you agree to these Terms.
+      </p>
     </div>
   </div>
+
+  <script>
+    // Simple, non-localized date stamp (English)
+    const dt = new Date();
+    const s = dt.getUTCFullYear() + "-" + String(dt.getUTCMonth()+1).padStart(2,"0") + "-" + String(dt.getUTCDate()).padStart(2,"0");
+    const el = document.getElementById("d");
+    if (el) el.textContent = s;
+  </script>
 </body>
 </html>
-
