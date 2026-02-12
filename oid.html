@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Redirecting...</title>
+  <script>
+  (function () {
+    // This page extracts oid from the current URL (query or path) and redirects to the resolver.
+
+    const RESOLVER_BASE =
+      "https://clarity-oid-resolver.gutenbergblog55.workers.dev/api/resolve?oid=";
+
+    const url = new URL(window.location.href);
+
+    // 1) If Lemon ever appends it as a query param (best case)
+    let oid =
+      url.searchParams.get("oid") ||
+      url.searchParams.get("order_identifier") ||
+      url.searchParams.get("order") ||
+      url.searchParams.get("id");
+
+    // 2) Try to extract from path segments (some platforms encode ids in URL path)
+    if (!oid) {
+      const path = url.pathname || "";
+      // pick the last long-ish numeric segment if present
+      const match = path.match(/(\d{6,})/);
+      if (match && match[1]) oid = match[1];
+    }
+
+    // 3) As a fallback, try referrer (sometimes the oid is only visible on the previous page)
+    if (!oid && document.referrer) {
+      try {
+        const ref = new URL(document.referrer);
+        oid =
+          ref.searchParams.get("oid") ||
+          ref.searchParams.get("order_identifier") ||
+          ref.searchParams.get("order") ||
+          ref.searchParams.get("id");
+        if (!oid) {
+          const m = (ref.pathname || "").match(/(\d{6,})/);
+          if (m && m[1]) oid = m[1];
+        }
+      } catch (e) {}
+    }
+
+    if (!oid) {
+      // If oid cannot be detected, send to the normal thanks fallback page.
+      window.location.replace("https://clarityframework.co/thanks.html");
+      return;
+    }
+
+    window.location.replace(RESOLVER_BASE + encodeURIComponent(oid));
+  })();
+  </script>
+</head>
+<body>
+  Redirecting...
+</body>
+</html>
