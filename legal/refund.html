@@ -14,39 +14,45 @@
     p,li{color:#b7bdd1}
     .muted{color:#9aa4b2;font-size:14px}
     .card{background:#11131a;border:1px solid #20263a;border-radius:16px;padding:28px}
+    .contact{font-size:14px;opacity:.8;margin-top:18px}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
       <h1>Refund Policy</h1>
+      <p class="muted">Last updated: <span id="d"></span></p>
 
-<p>
-Due to the instant-access nature of this digital product,
-all sales are final once access has been provided.
-</p>
+      <p>
+        Due to the instant-access nature of this digital product,
+        all sales are final once access has been provided.
+      </p>
 
-<p>
-Refunds are considered only in the following limited cases:
-</p>
+      <p>
+        Refunds are considered only in the following limited cases:
+      </p>
 
-<ul>
-<li>Confirmed duplicate charges.</li>
-<li>Verified technical failure preventing access that cannot be resolved using the provided instructions.</li>
-</ul>
+      <ul>
+        <li>Confirmed duplicate charges for the same purchase.</li>
+        <li>Verified technical failure preventing access that cannot be resolved using the provided instructions.</li>
+      </ul>
 
-<p>
-Dissatisfaction, interpretation questions, or subjective expectations
-do not qualify for refunds.
-</p>
+      <p>
+        Dissatisfaction, interpretation questions, or subjective expectations do not qualify for refunds.
+      </p>
 
-<p style="font-size:14px; opacity:.7;">
-For verified duplicate charge inquiries only:
-access@clarityframework.co
-</p>
-
+      <p class="contact">
+        For verified duplicate charges or confirmed access failures only:<br/>
+        <a href="mailto:access.clarityframework@gmail.com">access.clarityframework@gmail.com</a>
+      </p>
     </div>
   </div>
+
+  <script>
+    const dt = new Date();
+    const s = dt.getUTCFullYear() + "-" + String(dt.getUTCMonth()+1).padStart(2,"0") + "-" + String(dt.getUTCDate()).padStart(2,"0");
+    const el = document.getElementById("d");
+    if (el) el.textContent = s;
+  </script>
 </body>
 </html>
-
