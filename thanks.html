@@ -8,11 +8,14 @@
   (function () {
     const ASSESSMENT_URL = "https://tally.so/r/D4dkVb";
 
+    // --- Settings ---
+    const SLUG_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
     const params = new URLSearchParams(window.location.search);
     const slugFromQuery = params.get("slug");
     const nameFromQuery = params.get("name");
 
-    // If we received slug/name, store them (do NOT delete immediately)
+    // Save slug/name (with timestamp)
     if (slugFromQuery) {
       try {
         localStorage.setItem("cf_slug", slugFromQuery);
@@ -21,16 +24,29 @@
       } catch (e) {}
     }
 
-    // Try to recover
     let slug = null;
     let name = "";
     let lastReadingUrl = null;
+    let savedAt = null;
 
     try {
       slug = localStorage.getItem("cf_slug");
       name = localStorage.getItem("cf_name") || "";
       lastReadingUrl = localStorage.getItem("cf_last_reading_url");
+      savedAt = parseInt(localStorage.getItem("cf_slug_saved_at") || "", 10);
     } catch (e) {}
+
+    // Expire slug after TTL (reduce long-term confusion/complaints)
+    const now = Date.now();
+    const isExpired = savedAt && (now - savedAt > SLUG_TTL_MS);
+    if (isExpired) {
+      try {
+        localStorage.removeItem("cf_slug");
+        localStorage.removeItem("cf_name");
+        localStorage.removeItem("cf_slug_saved_at");
+      } catch (e) {}
+      slug = null;
+    }
 
     // If slug exists, go to reading
     if (slug) {
@@ -41,16 +57,18 @@
     // Otherwise show fallback page
     document.addEventListener("DOMContentLoaded", function () {
       const safeLast = lastReadingUrl && lastReadingUrl.startsWith(location.origin + "/reading/");
+
       document.body.innerHTML = `
         <div style="font-family: system-ui, -apple-system, Segoe UI, sans-serif; max-width: 760px; margin: 60px auto; padding: 0 20px; line-height: 1.55;">
           <h1 style="margin: 0 0 12px;">Reading unavailable</h1>
           <p style="margin: 0 0 14px;">We couldn’t open your reading from this session.</p>
 
           <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
-            <p style="margin: 0 0 10px;"><strong>Do not repurchase yet.</strong></p>
+            <p style="margin: 0 0 10px;"><strong>Do not repurchase.</strong></p>
             <p style="margin: 0;">
               This link is designed for immediate access right after checkout.
-              For future access, please bookmark your reading page once it opens.
+              If your reading opens, <strong>bookmark that page immediately</strong>.
+              Access depends on your browser session and local storage.
             </p>
           </div>
 
@@ -70,7 +88,7 @@
               <li>Disable aggressive privacy extensions temporarily if needed.</li>
             </ul>
             <p style="margin: 10px 0 0; color:#555; font-size: 14px;">
-              Only if your payment did <strong>not</strong> go through, you may return to the assessment and try again.
+              Only if your payment did <strong>not</strong> go through, return to the assessment and try again.
             </p>
           </div>
 
