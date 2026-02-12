@@ -54,3 +54,21 @@ if (el) el.textContent = name;
     note.insertAdjacentHTML("beforebegin", closingHTML);
   }
 })();
+/* --- Clarity Framework Signature Layer --- */
+(function () {
+  // Only apply on reading pages
+  if (!location.pathname.startsWith("/reading/")) return;
+
+  // Avoid duplicate injection
+  if (document.querySelector(".signature")) return;
+
+  const signatureHTML = `
+    <p class="signature">— Clarity Framework</p>
+  `;
+
+  const closing = document.querySelector(".closing");
+  if (closing) {
+    closing.insertAdjacentHTML("afterend", signatureHTML);
+  }
+})();
+
