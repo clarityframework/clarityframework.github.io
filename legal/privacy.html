@@ -14,7 +14,6 @@
     p,li{color:#b7bdd1}
     .muted{color:#9aa4b2;font-size:14px}
     .card{background:#11131a;border:1px solid #20263a;border-radius:16px;padding:28px}
-    code{color:#e8eaf1}
   </style>
 </head>
 <body>
@@ -33,16 +32,30 @@
       </p>
 
       <p>
-        Reading access relies on local browser storage.
-        Private browsing or restrictive privacy tools may prevent access.
+        To provide access to your purchased reading, we store a minimal access record for a limited time.
+        This may include:
+      </p>
+
+      <ul>
+        <li>An order identifier (non-payment identifier)</li>
+        <li>The reading page slug associated with your purchase</li>
+        <li>An optional name you provide for display purposes</li>
+      </ul>
+
+      <p>
+        This access record is used solely to enable access to your purchased content,
+        including recovery access via your order details and across devices.
+        It is automatically deleted after a defined retention period.
       </p>
 
       <p>
-        Local browser storage remains on your device unless you clear it.
+        We do not sell, rent, or trade personal data.
       </p>
 
       <p>
-        We do not sell personal data.
+        For privacy-related inquiries:
+        <br/>
+        <a href="mailto:access.clarityframework@gmail.com">access.clarityframework@gmail.com</a>
       </p>
     </div>
   </div>
@@ -50,8 +63,7 @@
   <script>
     const dt = new Date();
     const s = dt.getUTCFullYear() + "-" + String(dt.getUTCMonth()+1).padStart(2,"0") + "-" + String(dt.getUTCDate()).padStart(2,"0");
-    const el = document.getElementById("d");
-    if (el) el.textContent = s;
+    document.getElementById("d").textContent = s;
   </script>
 </body>
 </html>
