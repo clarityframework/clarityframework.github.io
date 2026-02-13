@@ -1,32 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Open Reading</title>
-  <meta name="robots" content="noindex,nofollow" />
+  <title>Redirecting...</title>
   <script>
-    (function () {
-      // IMPORTANT: set your Worker base URL here
-      const WORKER_RESOLVE_BASE = "https://clarity-oid-resolver.gutenbergblog55.workers.dev/api/resolve";
+  (function () {
+    // This page extracts oid from the current URL (query or path) and redirects to the resolver.
 
-      const params = new URLSearchParams(window.location.search);
-      const oid = params.get("oid");
+    const RESOLVER_BASE =
+      "https://clarity-oid-resolver.gutenbergblog55.workers.dev/api/resolve?oid=";
 
-      if (!oid) {
-        document.addEventListener("DOMContentLoaded", function () {
-          document.body.innerHTML =
-            '<div style="font-family:system-ui,-apple-system,Segoe UI,sans-serif;max-width:720px;margin:60px auto;padding:0 20px;line-height:1.6;">' +
-            '<h1 style="margin:0 0 10px;">Missing order reference</h1>' +
-            '<p style="margin:0 0 16px;">Please open the link from your order confirmation or receipt email.</p>' +
-            '</div>';
-        });
-        return;
-      }
+    const url = new URL(window.location.href);
 
-      const target = WORKER_RESOLVE_BASE + "?oid=" + encodeURIComponent(oid);
-      window.location.replace(target);
-    })();
+    // 1) If Lemon ever appends it as a query param (best case)
+    let oid =
+      url.searchParams.get("oid") ||
+      url.searchParams.get("order_identifier") ||
+      url.searchParams.get("order") ||
+      url.searchParams.get("id");
+
+    // 2) Try to extract from path segments (some platforms encode ids in URL path)
+    if (!oid) {
+      const path = url.pathname || "";
+      // pick the last long-ish numeric segment if present
+      const match = path.match(/(\d{6,})/);
+      if (match && match[1]) oid = match[1];
+    }
+
+    // 3) As a fallback, try referrer (sometimes the oid is only visible on the previous page)
+    if (!oid && document.referrer) {
+      try {
+        const ref = new URL(document.referrer);
+        oid =
+          ref.searchParams.get("oid") ||
+          ref.searchParams.get("order_identifier") ||
+          ref.searchParams.get("order") ||
+          ref.searchParams.get("id");
+        if (!oid) {
+          const m = (ref.pathname || "").match(/(\d{6,})/);
+          if (m && m[1]) oid = m[1];
+        }
+      } catch (e) {}
+    }
+
+    if (!oid) {
+      // If oid cannot be detected, send to the normal thanks fallback page.
+      window.location.replace("https://clarityframework.co/thanks.html");
+      return;
+    }
+
+    window.location.replace(RESOLVER_BASE + encodeURIComponent(oid));
+  })();
   </script>
 </head>
 <body>
