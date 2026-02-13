@@ -10,7 +10,6 @@
     .wrap{max-width:860px;margin:0 auto;padding:56px 20px}
     a{color:#9fb4ff}
     h1{margin:0 0 8px;font-size:30px}
-    h2{margin:28px 0 10px;font-size:18px}
     p,li{color:#b7bdd1}
     .muted{color:#9aa4b2;font-size:14px}
     .card{background:#11131a;border:1px solid #20263a;border-radius:16px;padding:28px}
@@ -34,11 +33,12 @@
 
       <ul>
         <li>Confirmed duplicate charges for the same purchase.</li>
-        <li>Verified technical failure preventing access that cannot be resolved using the provided instructions.</li>
+        <li>Verified technical failure preventing access that cannot be resolved using the provided order-based access instructions.</li>
       </ul>
 
       <p>
-        Dissatisfaction, interpretation questions, or subjective expectations do not qualify for refunds.
+        Dissatisfaction, interpretation questions, subjective expectations,
+        or misuse of browser settings do not qualify for refunds.
       </p>
 
       <p class="contact">
@@ -51,8 +51,7 @@
   <script>
     const dt = new Date();
     const s = dt.getUTCFullYear() + "-" + String(dt.getUTCMonth()+1).padStart(2,"0") + "-" + String(dt.getUTCDate()).padStart(2,"0");
-    const el = document.getElementById("d");
-    if (el) el.textContent = s;
+    document.getElementById("d").textContent = s;
   </script>
 </body>
 </html>
