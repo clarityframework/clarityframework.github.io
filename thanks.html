@@ -31,44 +31,44 @@
     if (error === "missing") {
       document.addEventListener("DOMContentLoaded", function () {
         document.body.innerHTML = `
-          <div style="font-family: system-ui, -apple-system, Segoe UI, sans-serif; max-width: 760px; margin: 60px auto; padding: 0 20px; line-height: 1.55;">
-            <h1 style="margin: 0 0 12px;">Reading unavailable</h1>
-            <p style="margin: 0 0 14px;">
-              We couldn’t locate your reading page for this order.
-            </p>
+  <div style="font-family: system-ui, -apple-system, Segoe UI, sans-serif; max-width: 760px; margin: 60px auto; padding: 0 20px; line-height: 1.55;">
+    <h1 style="margin: 0 0 12px;">Reading unavailable</h1>
+    <p style="margin: 0 0 14px;">
+      We couldn’t locate your reading page for this order.
+    </p>
 
-            <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
-              <p style="margin: 0 0 10px;"><strong>Do not repurchase.</strong></p>
-              <p style="margin: 0;">
-                Open your order details (“View order”) and click the reading button again.
-              </p>
-              <p style="margin: 10px 0 0; font-size: 14px; color: #555;">
-                If it still doesn’t open, contact:
-                <a href="mailto:${SUPPORT_EMAIL}" style="color:#111; text-decoration:underline;">${SUPPORT_EMAIL}</a>
-              </p>
-            </div>
+    <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
+      <p style="margin: 0 0 10px;"><strong>Do not repurchase.</strong></p>
+      <p style="margin: 0;">
+        Open <strong>“View order”</strong> and click the reading button again.
+      </p>
+      <p style="margin: 10px 0 0; font-size: 14px; color: #555;">
+        If it still doesn’t open, contact:
+        <a href="mailto:${SUPPORT_EMAIL}" style="color:#111; text-decoration:underline;">${SUPPORT_EMAIL}</a>
+      </p>
+    </div>
 
-            <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
-              <p style="margin: 0 0 10px;"><strong>Fix (recommended):</strong></p>
-              <ul style="margin: 0; padding-left: 18px;">
-                <li>Use a normal browser window (not private mode).</li>
-                <li>Disable aggressive privacy extensions temporarily if needed.</li>
-                <li>Try another browser or device using the same order (“View order”).</li>
-              </ul>
-              <p style="margin: 10px 0 0; color:#555; font-size: 14px;">
-                Only if your payment did <strong>not</strong> go through, return to the assessment and try again.
-              </p>
-            </div>
+    <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
+      <p style="margin: 0 0 10px;"><strong>Fix (recommended):</strong></p>
+      <ul style="margin: 0; padding-left: 18px;">
+        <li>Use a normal browser window (not private mode).</li>
+        <li>Disable aggressive privacy extensions temporarily if needed.</li>
+        <li>Try another browser or device using the same order (“View order”).</li>
+      </ul>
+      <p style="margin: 10px 0 0; color:#555; font-size: 14px;">
+        Only if your payment did <strong>not</strong> go through, return to the assessment and try again.
+      </p>
+    </div>
 
-            <a href="${ASSESSMENT_URL}" style="display: inline-block; padding: 12px 16px; border-radius: 10px; text-decoration: none; border: 1px solid #111; color: #111;">
-              Back to Assessment
-            </a>
+    <a href="${ASSESSMENT_URL}" style="display: inline-block; padding: 12px 16px; border-radius: 10px; text-decoration: none; border: 1px solid #111; color: #111;">
+      Back to Assessment
+    </a>
 
-            <p style="margin: 18px 0 0; color: #666; font-size: 14px;">
-              Note: This is a self-reflection tool (not fortune-telling).
-            </p>
-          </div>
-        `;
+    <p style="margin: 18px 0 0; color: #666; font-size: 14px;">
+      Note: This is a self-reflection tool (not fortune-telling).
+    </p>
+  </div>
+`;
       });
       return;
     }
