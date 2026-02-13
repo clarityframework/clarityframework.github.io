@@ -10,7 +10,6 @@
     .wrap{max-width:860px;margin:0 auto;padding:56px 20px}
     a{color:#9fb4ff}
     h1{margin:0 0 8px;font-size:30px}
-    h2{margin:28px 0 10px;font-size:18px}
     p,li{color:#b7bdd1}
     .muted{color:#9aa4b2;font-size:14px}
     .card{background:#11131a;border:1px solid #20263a;border-radius:16px;padding:28px}
@@ -28,29 +27,31 @@
       </p>
 
       <p>
-        No interpretation, coaching, or advisory support is provided.
+        No interpretation, coaching, consulting, or advisory services are provided.
       </p>
 
       <p>
-        All decisions and actions remain the sole responsibility of the user.
+        All decisions, actions, and outcomes remain the sole responsibility of the user.
       </p>
 
       <p>
-        Content may not be copied, redistributed, shared, or resold.
+        Content may not be copied, reproduced, redistributed, shared, licensed, or resold in any form.
       </p>
 
       <p>
-        By purchasing, you agree to these Terms.
+        Unauthorized distribution or commercial use is strictly prohibited.
+      </p>
+
+      <p>
+        By purchasing, accessing, or using this product, you agree to these Terms.
       </p>
     </div>
   </div>
 
   <script>
-    // Simple, non-localized date stamp (English)
     const dt = new Date();
     const s = dt.getUTCFullYear() + "-" + String(dt.getUTCMonth()+1).padStart(2,"0") + "-" + String(dt.getUTCDate()).padStart(2,"0");
-    const el = document.getElementById("d");
-    if (el) el.textContent = s;
+    document.getElementById("d").textContent = s;
   </script>
 </body>
 </html>
