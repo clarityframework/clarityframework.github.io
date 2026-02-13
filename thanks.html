@@ -6,12 +6,17 @@
   <title>Your Reading</title>
   <script>
   (function () {
+    const ASSESSMENT_URL = "https://tally.so/r/D4dkVb";
+    const SUPPORT_EMAIL = "access.clarityframework@gmail.com";
+    const SLUG_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+    const params = new URLSearchParams(window.location.search);
+    const oid = params.get("oid");
+    const error = params.get("error") || "";
 
     // ===============================
-    // NEW: OID restore (cross-device)
+    // OID restore (cross-device)
     // ===============================
-    const paramsEarly = new URLSearchParams(window.location.search);
-    const oid = paramsEarly.get("oid");
     if (oid) {
       const resolveUrl =
         "https://clarity-oid-resolver.gutenbergblog55.workers.dev/api/resolve?oid=" +
@@ -19,20 +24,65 @@
       window.location.replace(resolveUrl);
       return;
     }
+
     // ===============================
+    // Worker fallback (missing KV / not found)
+    // ===============================
+    if (error === "missing") {
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.innerHTML = `
+          <div style="font-family: system-ui, -apple-system, Segoe UI, sans-serif; max-width: 760px; margin: 60px auto; padding: 0 20px; line-height: 1.55;">
+            <h1 style="margin: 0 0 12px;">Reading unavailable</h1>
+            <p style="margin: 0 0 14px;">
+              We couldn’t locate your reading page for this order.
+            </p>
 
-    const ASSESSMENT_URL = "https://tally.so/r/D4dkVb";
-    const SLUG_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+            <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
+              <p style="margin: 0 0 10px;"><strong>Do not repurchase.</strong></p>
+              <p style="margin: 0;">
+                Open your order details (“View order”) and click the reading button again.
+              </p>
+              <p style="margin: 10px 0 0; font-size: 14px; color: #555;">
+                If it still doesn’t open, contact:
+                <a href="mailto:${SUPPORT_EMAIL}" style="color:#111; text-decoration:underline;">${SUPPORT_EMAIL}</a>
+              </p>
+            </div>
 
-    const params = new URLSearchParams(window.location.search);
+            <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
+              <p style="margin: 0 0 10px;"><strong>Fix (recommended):</strong></p>
+              <ul style="margin: 0; padding-left: 18px;">
+                <li>Use a normal browser window (not private mode).</li>
+                <li>Disable aggressive privacy extensions temporarily if needed.</li>
+                <li>Try another browser or device using the same order (“View order”).</li>
+              </ul>
+              <p style="margin: 10px 0 0; color:#555; font-size: 14px;">
+                Only if your payment did <strong>not</strong> go through, return to the assessment and try again.
+              </p>
+            </div>
+
+            <a href="${ASSESSMENT_URL}" style="display: inline-block; padding: 12px 16px; border-radius: 10px; text-decoration: none; border: 1px solid #111; color: #111;">
+              Back to Assessment
+            </a>
+
+            <p style="margin: 18px 0 0; color: #666; font-size: 14px;">
+              Note: This is a self-reflection tool (not fortune-telling).
+            </p>
+          </div>
+        `;
+      });
+      return;
+    }
+
+    // ===============================
+    // Legacy slug flow (same-device)
+    // ===============================
     const slugFromQuery = params.get("slug");
-    const nameFromQuery = params.get("name");
+    const nameFromQuery = params.get("name") || "";
 
-    // Save slug/name (with timestamp)
     if (slugFromQuery) {
       try {
         localStorage.setItem("cf_slug", slugFromQuery);
-        localStorage.setItem("cf_name", nameFromQuery || "");
+        localStorage.setItem("cf_name", nameFromQuery);
         localStorage.setItem("cf_slug_saved_at", String(Date.now()));
       } catch (e) {}
     }
@@ -49,9 +99,9 @@
       savedAt = parseInt(localStorage.getItem("cf_slug_saved_at") || "", 10);
     } catch (e) {}
 
-    // Expire slug after TTL
     const now = Date.now();
     const isExpired = savedAt && (now - savedAt > SLUG_TTL_MS);
+
     if (isExpired) {
       try {
         localStorage.removeItem("cf_slug");
@@ -61,13 +111,14 @@
       slug = null;
     }
 
-    // If slug exists, go to reading
     if (slug) {
       window.location.href = "/reading/" + slug + ".html?name=" + encodeURIComponent(name);
       return;
     }
 
-    // Otherwise show fallback page
+    // ===============================
+    // Generic fallback (no oid, no slug)
+    // ===============================
     document.addEventListener("DOMContentLoaded", function () {
       const safeLast = lastReadingUrl && lastReadingUrl.startsWith(location.origin + "/reading/");
 
@@ -77,15 +128,9 @@
           <p style="margin: 0 0 14px;">We couldn’t open your reading from this session.</p>
 
           <div style="margin: 18px 0; padding: 14px 16px; border: 1px solid #e6e6e6; border-radius: 10px;">
-            <p style="margin: 0 0 10px;"><strong>Do not repurchase for the same session.</strong></p>
+            <p style="margin: 0 0 10px;"><strong>Do not repurchase.</strong></p>
             <p style="margin: 0;">
-              This link is designed for immediate access right after checkout.
-              If your reading opens, <strong>bookmark that page immediately</strong>.
-              Access depends on your browser session and local storage.
-            </p>
-            <p style="margin: 10px 0 0; font-size: 14px; color: #555;">
-              If you wish to take the assessment again in the future,
-              you are welcome to do so at any time.
+              Open your order details (“View order”) and click the reading button again.
             </p>
           </div>
 
@@ -104,9 +149,6 @@
               <li>Avoid multiple tabs during checkout.</li>
               <li>Disable aggressive privacy extensions temporarily if needed.</li>
             </ul>
-            <p style="margin: 10px 0 0; color:#555; font-size: 14px;">
-              Only if your payment did <strong>not</strong> go through, return to the assessment and try again.
-            </p>
           </div>
 
           <a href="${ASSESSMENT_URL}" style="display: inline-block; padding: 12px 16px; border-radius: 10px; text-decoration: none; border: 1px solid #111; color: #111;">
