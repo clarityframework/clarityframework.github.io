@@ -43,6 +43,46 @@ if (el) el.textContent = name;
   if (note) note.insertAdjacentHTML("beforebegin", closingHTML);
 })();
 
+/* --- Clarity Framework Copy Link Layer --- */
+(function () {
+  if (!location.pathname.startsWith("/reading/")) return;
+  if (document.querySelector(".copy-link-wrap")) return;
+
+  const wrap = document.createElement("div");
+  wrap.className = "copy-link-wrap";
+  wrap.style.marginTop = "10px";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.textContent = "Copy this page link";
+  btn.style.cssText =
+    "padding:8px 12px;border-radius:8px;border:1px solid #111;background:#fff;color:#111;cursor:pointer;";
+
+  const msg = document.createElement("div");
+  msg.style.fontSize = "14px";
+  msg.style.marginTop = "6px";
+  msg.style.color = "#555";
+
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      msg.textContent = "Link copied.";
+    } catch (e) {
+      msg.textContent = window.location.href;
+    }
+  });
+
+  wrap.appendChild(btn);
+  wrap.appendChild(msg);
+
+  const card = document.querySelector(".card");
+  if (!card) return;
+
+  const note = document.querySelector(".bookmark-note");
+  if (note) note.insertAdjacentElement("afterend", wrap);
+  else card.prepend(wrap);
+})();
+
 /* --- Clarity Framework Signature Layer --- */
 (function () {
   if (!location.pathname.startsWith("/reading/")) return;
